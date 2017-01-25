@@ -46,7 +46,7 @@ def handle(message):
             if date < today.date():
                 continue
 
-            if date == today.date() and today.time() > datetime.time(12):
+            if date == today.date() and today.time() > datetime.time(17):
                 continue
 
             response += '*Aufgaben für den {}*'.format(date.strftime('%d.%m.%Y'))
