@@ -46,15 +46,19 @@ def handle(message):
             if date < today.date():
                 continue
 
-            if date == today.date() and today.time() > datetime.time(17):
+            if date == today.date() and today.time() > datetime.time(12):
                 continue
+
+            if date > (today.date() + datetime.timedelta(days=6)):
+                break
+
+            if response != '':
+                response += '\n\n'
 
             response += '*Aufgaben für den {}*'.format(date.strftime('%d.%m.%Y'))
 
             for event in events[date]:
                 response += '\n- {}'.format(event).replace('_', '\\_').replace('*', '\\*')
-
-            break
 
     bot.sendMessage(sender, response, parse_mode='Markdown')
 
@@ -63,4 +67,3 @@ bot.message_loop(handle)
 
 while 1:
     time.sleep(10)
-
