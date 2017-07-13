@@ -1,3 +1,2 @@
-telepot
-icalendar
-
+telepot == 12.1
+icalendar == 3.11.5
