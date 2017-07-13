@@ -7,7 +7,7 @@ import telepot
 from icalendar import Calendar
 
 try:
-    bot = telepot.Bot(os.environ['BM14D_CALENDAR_TELEGRAM_KEY'])
+    bot = telepot.Bot(os.environ['TELEGRAM_API_KEY'])
 except telepot.exception.BadHTTPResponse:
     pass
 
