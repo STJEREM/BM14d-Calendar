@@ -47,6 +47,8 @@ def handle(message):
     response = '\n\n'.join([format_day(day) for day in events])
     bot.sendMessage(sender, response, parse_mode='Markdown')
 
+    events = {}
+
 
 def format_day(day):
     response = '*Aufgaben für den {}*'.format(day.strftime('%d.%m.%Y'))
