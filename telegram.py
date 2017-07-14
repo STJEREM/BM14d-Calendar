@@ -4,18 +4,27 @@ import time
 import os
 import urllib.request
 import telepot
+import json
 from icalendar import Calendar
 
 try:
     bot = telepot.Bot(os.environ['TELEGRAM_API_KEY'])
 except telepot.exception.BadHTTPResponse:
-    pass
+    exit(1)
+
+
+me = bot.getMe()
 
 events = {}
 today = datetime.datetime.now()
 
 
 def handle(message):
+    message['to'] = me
+
+    with open('/var/log/bm14d-bot/messages.log', 'a') as file:
+        file.write(json.dumps(message) + '\n')
+
     global events, today
 
     sender = message['chat']['id']
