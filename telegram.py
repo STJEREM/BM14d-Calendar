@@ -15,17 +15,15 @@ except telepot.exception.BadHTTPResponse:
 
 me = bot.getMe()
 
-events = {}
-today = datetime.datetime.now()
-
 
 def handle(message):
+    events = {}
+    today = datetime.datetime.now()
+
     message['to'] = me
 
     with open('/var/log/bm14d-bot/messages.log', 'a') as file:
         file.write(json.dumps(message) + '\n')
-
-    global events, today
 
     sender = message['chat']['id']
 
@@ -53,13 +51,11 @@ def handle(message):
 
     events = collections.OrderedDict(sorted(events.items()))
 
-    response = '\n\n'.join([format_day(day) for day in events])
+    response = '\n\n'.join([format_day(day, events) for day in events])
     bot.sendMessage(sender, response, parse_mode='Markdown')
 
-    events = {}
 
-
-def format_day(day):
+def format_day(day, events):
     response = '*Aufgaben für den {}*'.format(day.strftime('%d.%m.%Y'))
 
     for event in events[day]:
