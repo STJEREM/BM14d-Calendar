@@ -1,2 +1,2 @@
-telepot == 12.1
+telepot == 12.5
 icalendar == 3.11.5

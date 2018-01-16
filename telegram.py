@@ -12,7 +12,6 @@ try:
 except telepot.exception.BadHTTPResponse:
     exit(1)
 
-
 me = bot.getMe()
 
 
@@ -52,7 +51,12 @@ def handle(message):
     events = collections.OrderedDict(sorted(events.items()))
 
     response = '\n\n'.join([format_day(day, events) for day in events])
-    bot.sendMessage(sender, response, parse_mode='Markdown')
+    sent_message = bot.sendMessage(sender, response, parse_mode='Markdown')
+
+    try:
+        bot.pinChatMessage(sent_message['chat']['id'], sent_message['message_id'], disable_notification=True)
+    except:
+        pass
 
 
 def format_day(day, events):
